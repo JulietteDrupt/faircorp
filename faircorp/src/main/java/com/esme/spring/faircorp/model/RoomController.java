@@ -30,5 +30,22 @@ public class RoomController {
         return roomDao.findById(id).map(room -> new RoomDto(room)).orElse(null);
     }
 
+    @PostMapping
+    public RoomDto create(@RequestBody RoomDto dto) {
+        Room room = null;
+        if (dto.getId() != null) {
+            room = roomDao.findById(dto.getId()).orElse(null);
+        }
+
+        if (room == null) {
+            room = roomDao.save(new Room());
+        } else {
+            room.setName((dto.getName()));
+            room.setFloor(dto.getFloor());
+            roomDao.save(room);
+        }
+
+        return new RoomDto(room);
+    }
 
 }
