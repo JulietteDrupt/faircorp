@@ -20,6 +20,10 @@ public class Room {
     @OneToMany
     private List<Light> lights;
 
+    @ManyToOne
+    private Building building;
+
+
     public Room() {
     }
 
@@ -59,6 +63,14 @@ public class Room {
 
     public void setLights(List<Light> lights) {
         this.lights = lights;
+    }
+
+    public Building getBuilding() {
+        return this.building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
     }
 
 }

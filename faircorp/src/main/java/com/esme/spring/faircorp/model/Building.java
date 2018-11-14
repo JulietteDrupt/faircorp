@@ -11,6 +11,7 @@ public class Building {
     @GeneratedValue
     private Long id;
 
+    @Column
     @OneToMany
     private List<Room> rooms;
 
