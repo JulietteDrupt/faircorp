@@ -1,6 +1,7 @@
 package com.esme.spring.faircorp.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "ROOM")
@@ -16,12 +17,16 @@ public class Room {
     @Column(nullable = false)
     private Integer floor;
 
+    @OneToMany
+    private List<Light> lights;
+
     public Room() {
     }
 
-    public Room(String name, Integer floor) {
+    public Room(String name, Integer floor, List<Light> lights) {
         this.name = name;
         this.floor = floor;
+        this.lights = lights;
     }
 
     public Long getId() {
@@ -46,6 +51,14 @@ public class Room {
 
     public void setFloor(Integer floor) {
         this.floor = floor;
+    }
+
+    public List<Light> getLights() {
+        return this.lights;
+    }
+
+    public void setLights(List<Light> lights) {
+        this.lights = lights;
     }
 
 }
