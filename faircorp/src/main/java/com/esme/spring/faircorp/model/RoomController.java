@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 public class RoomController {
 
     @Autowired
+    private LightDao lightDao;
+    @Autowired
     private RoomDao roomDao;
     @Autowired
     private BuildingDao buildingDao;
@@ -29,6 +31,7 @@ public class RoomController {
     public RoomDto findById(@PathVariable Long id) {
         return roomDao.findById(id).map(room -> new RoomDto(room)).orElse(null);
     }
+
 
     @PostMapping
     public RoomDto create(@RequestBody RoomDto dto) {
@@ -50,6 +53,8 @@ public class RoomController {
 
     @DeleteMapping(path = "/{id}")
     public void delete(@PathVariable Long id) {
+        Room room = roomDao.getOne(id);
+        room.getLights().forEach(light -> lightDao.delete(light));
         roomDao.deleteById(id);
     }
 
