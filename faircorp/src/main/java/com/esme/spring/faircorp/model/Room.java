@@ -33,6 +33,12 @@ public class Room {
         this.lights = lights;
     }
 
+    public Room(Building building, String name, Integer floor) {
+        this.building = building;
+        this.name = name;
+        this.floor = floor;
+    }
+
     public Long getId() {
         return id;
     }
