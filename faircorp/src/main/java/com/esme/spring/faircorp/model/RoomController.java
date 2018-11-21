@@ -33,6 +33,14 @@ public class RoomController {
     }
 
 
+    @PutMapping(path = "/{id}/switchLight")
+    public RoomDto switchStatusLight(@PathVariable Long id) {
+        Room room = roomDao.getOne(id);
+        room.getLights().forEach(light -> light.setStatus(light.getStatus() == Status.ON ? Status.OFF: Status.ON));
+        return new RoomDto(room);
+    }
+
+
     @PostMapping
     public RoomDto create(@RequestBody RoomDto dto) {
         Room room = null;
