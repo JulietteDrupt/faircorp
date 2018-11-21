@@ -16,6 +16,7 @@ public class RoomDaoImpl implements RoomDaoCustom {
                 .getResultList();
     }
 
+    @Override
     public List<Light> findLights(Long id) {
         String jpql = "select lt from Light lt where lt.roomId = :value";
         return em.createQuery(jpql, Light.class)
