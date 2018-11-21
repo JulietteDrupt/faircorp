@@ -18,9 +18,15 @@ public class BuildingController {
     private RoomDao roomDao;
     @Autowired
     private BuildingDao buildingDao;
+
     @GetMapping
     public List<BuildingDto> findAll() {
         return buildingDao.findAll().stream().map(BuildingDto::new).collect(Collectors.toList());
+    }
+
+    @GetMapping(path = "/{id}")
+    public BuildingDto findById(@PathVariable Long id) {
+        return buildingDao.findById(id).map(building -> new BuildingDto(building)).orElse(null);
     }
 
     @PostMapping
@@ -38,4 +44,13 @@ public class BuildingController {
 
         return new BuildingDto(building);
     }
+
+    @DeleteMapping(path = "/{id}")
+    public void delete(@PathVariable Long id) {
+        Building building = buildingDao.getOne(id);
+        building.getRooms().forEach(room -> room.getLights().forEach(light -> lightDao.delete(light)));
+        building.getRooms().forEach(room -> roomDao.delete(room));
+        buildingDao.delete(building);
+    }
+
 }
