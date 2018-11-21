@@ -48,4 +48,9 @@ public class RoomController {
         return new RoomDto(room);
     }
 
+    @DeleteMapping(path = "/{id}")
+    public void delete(@PathVariable Long id) {
+        roomDao.deleteById(id);
+    }
+
 }
