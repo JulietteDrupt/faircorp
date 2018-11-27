@@ -7,7 +7,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController  // (1)
+@RestController // (1)
+@CrossOrigin
 @RequestMapping("/api/lights") // (2)
 @Transactional // (3)
 public class LightController {

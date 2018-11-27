@@ -1,13 +1,11 @@
 package com.esme.spring.faircorp.hello;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/hello")
 @Transactional
 public class HelloController {
